@@ -1,3 +1,17 @@
+"""
+Luthier's Toolbox luthier_functions.py
+
+This code provides a collection of functions used for my Luthier's Toolbox apps, a set of web-based tools for guitar building and repair. These functions are designed to perform calculations and conversions commonly used in the field of luthierie.
+
+The code is released under the GNU General Public License v3 (GPL-3.0), which grants users the freedom to use, modify, and distribute the code under certain conditions. Please refer to the full license text for more information.
+
+For more, visit the repository at: https://github.com/tedbergstrand/luthiers-toolbox
+
+2023 Ted Bergstrand
+"""
+
+
+
 from fractions import Fraction
 
 def round_to_denominator(fraction_value, denominator=64):
@@ -67,7 +81,8 @@ def input_to_inches(input_value):
 
 	The function takes an input value string and converts it to decimal inches. The input value can include various units
 	such as inches, millimeters, centimeters, meters, feet, yards, kilometers, microns, or miles. The input value can also
-	be in different formats including decimal numbers, fractions, or mixed fractions.
+	be in different formats including decimal numbers, fractions, or mixed fractions. It's designed to take an input in any 
+	way you'd write it down.
 
 	The function first performs some string manipulation to ensure consistency in parsing. It replaces any apostrophes
 	with "ft" for unit consistency, and replaces commas with decimals for European users.
@@ -178,6 +193,7 @@ def input_to_inches(input_value):
 	return decimal_inch
 
 
+from fractions import Fraction
 
 def convert(input_value):
     """
