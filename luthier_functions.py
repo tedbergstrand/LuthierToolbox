@@ -202,7 +202,7 @@ def convert(input_value):
 
     Note:
         - The fractional output is not a true conversion. It represents the closest measurement on a ruler.
-        - Commas are replaced with decimals for non-American users and unit-matching & conversion are done via the input_to_inches function.
+        - Commas are replaced with decimals for non-American users and unit-matching and conversion into inches are done via the input_to_inches function.
 
     TODO:
         - Add regular proper fractional output (non-ruler)?
