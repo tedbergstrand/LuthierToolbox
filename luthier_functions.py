@@ -299,7 +299,6 @@ def calculate_spacing(nut_width, string_gauges, edge_distance=Decimal('0.125'), 
     inter_string_distance, positions = calculate_spacing(nut_width, string_gauges, edge_distance=Decimal('0.125'), edge_checkbox=False)
     """
 
-    print(f"Calculating spacing for guitar type: {string_gauges}")
     # Set the precision to 4 decimal places (6 digits)
     getcontext().prec = 6
 
