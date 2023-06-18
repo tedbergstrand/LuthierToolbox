@@ -32,11 +32,11 @@ def round_to_denominator(fraction_value, denominator=64):
         >>> round_to_denominator(0.45)
         Fraction(9, 20)
     """
-
+	
     # If the fraction value is 0, return 0 with the specified denominator
     if fraction_value == 0:
         return Fraction(0, denominator)
-    
+
     # If the fraction value is negative, store the sign and make the value positive
     elif fraction_value < 0:
         sign = -1
@@ -44,18 +44,19 @@ def round_to_denominator(fraction_value, denominator=64):
     else:
         sign = 1
 
-    # Exponentiate by -6 to start with the smallest denominator (1/64 = 10^-6)
-    exp = -6
-    while exp <= 0:
-        denominator = 2 ** (-exp)
-        numerator = round(fraction_value * denominator)
-        fraction = Fraction(numerator, denominator)
+    # Set of standard denominators to consider
+    standard_denominators = {2, 4, 8, 16, 32, denominator}
 
-        # Check if the denominator is one of the standard ruler denominators or the specified denominator
-        if fraction.denominator in [2, 4, 8, 16, 32, denominator]:
-            # If the denominator is found, return the fraction with the sign
-            return sign * fraction
-        exp += 1
+    # Calculate the numerator by rounding the fraction value multiplied by the denominator
+    numerator = round(fraction_value * denominator)
+
+    # Create a Fraction object using the calculated numerator and denominator
+    fraction = Fraction(numerator, denominator)
+
+    # Check if the denominator is one of the standard ruler denominators or the specified denominator
+    if fraction.denominator in standard_denominators:
+        # If the denominator is found, return the fraction with the sign
+        return sign * fraction
 
     # If no suitable denominator is found, return the input value with the sign
     return sign * fraction_value
@@ -81,11 +82,12 @@ def input_to_inches(input_value):
 
 	The function takes an input value string and converts it to decimal inches. The input value can include various units
 	such as inches, millimeters, centimeters, meters, feet, yards, kilometers, microns, or miles. The input value can also
-	be in different formats including decimal numbers, fractions, or mixed fractions. It's designed to take an input in any 
+	be in different formats including decimal numbers, fractions, or mixed fractions. It's designed to take input in any 
 	way you'd write it down.
 
 	The function first performs some string manipulation to ensure consistency in parsing. It replaces any apostrophes
-	with "ft" for unit consistency, and replaces commas with decimals for European users.
+	with "ft" for unit consistency and replaces commas with decimals for non-American users. The " symbol for inches is 
+ 	ignored because any unknown unit will default to inches.
 
 	The input value is then parsed using a regular expression pattern, which extracts the numeric value and the unit
 	from the input string. The extracted numeric value is converted to a float, taking into account different formats
@@ -98,9 +100,6 @@ def input_to_inches(input_value):
 	decimal inches by dividing the numeric value by the appropriate conversion factor based on the unit.
 
 	The resulting decimal inch value is returned as a float.
-
-	Note: The function requires the 're' module for regular expression matching and the 'fractions' module for working
-	with fractions.
 	"""
 
 	# Replace any apostrophes with "ft" for consistency in parsing.
@@ -116,7 +115,6 @@ def input_to_inches(input_value):
 	# - \s*: Matches optional whitespace characters between the numeric value and the unit
 	# - ([a-zA-Z]+)?: Matches an optional unit composed of one or more alphabetical characters
 	# The pattern allows for flexible matching of various numeric formats and units in the input value
-
 
 	pattern = r'((\d+\s)?\d+/\d+|\d+(\.\d+)?|\.\d+)\s*([a-zA-Z]+)?'
 	match = re.match(pattern, input_value)
