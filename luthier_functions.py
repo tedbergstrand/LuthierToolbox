@@ -1,11 +1,11 @@
 """
 Luthier's Toolbox luthier_functions.py
 
-This code provides a collection of functions used for my Luthier's Toolbox apps, a set of web-based tools for guitar building and repair. These functions are designed to perform calculations and conversions commonly used in the field of luthierie.
+This code provides a collection of functions used for my Luthier Toolbox apps, a set of web-based tools for guitar building and repair. These functions are designed to perform calculations and conversions commonly used in the field of luthierie.
 
 The code is released under the GNU General Public License v3 (GPL-3.0), which grants users the freedom to use, modify, and distribute the code under certain conditions. Please refer to the full license text for more information.
 
-For more, visit the repository at: https://github.com/tedbergstrand/luthiers-toolbox
+For more, visit the repository at: https://github.com/tedbergstrand/LuthierToolbox
 
 2023 Ted Bergstrand
 """
