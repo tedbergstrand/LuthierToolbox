@@ -25,9 +25,6 @@ def round_to_denominator(fraction_value, denominator=64):
     Returns:
         Fraction: The rounded fraction using the nearest denominator found on the ruler.
 
-    Raises:
-        None.
-
     Example:
         >>> round_to_denominator(0.45)
         Fraction(9, 20)
