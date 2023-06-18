@@ -1,17 +1,3 @@
-"""
-Luthier's Toolbox luthier_functions
-
-This code provides a collection of functions used for my Luthier's Toolbox apps, a set of web-based tools for guitar building and repair. These functions are designed to perform calculations and conversions commonly used in the field of luthierie.
-
-The code is released under the GNU General Public License v3 (GPL-3.0), which grants users the freedom to use, modify, and distribute the code under certain conditions. Please refer to the full license text for more information.
-
-For more, visit the repository at: https://github.com/tedbergstrand/luthiers-toolbox
-
-2023 Ted Bergstrand
-"""
-
-
-
 from fractions import Fraction
 
 def round_to_denominator(fraction_value, denominator=64):
@@ -192,7 +178,6 @@ def input_to_inches(input_value):
 	return decimal_inch
 
 
-from fractions import Fraction
 
 def convert(input_value):
     """
@@ -339,7 +324,7 @@ def calculate_spacing(nut_width, string_gauges, edge_distance=Decimal('0.125'), 
     return inter_string_distance, positions
 
 def fret_placement(scale_length, fret_number):
-	"""
+    """
     Calculates the placement of a fret on a stringed instrument based on the scale length and fret number. Works with either metric or inches.
 
     Args:
@@ -363,9 +348,8 @@ def fret_placement(scale_length, fret_number):
     """
     return scale_length - (scale_length / (2 ** (fret_number / 12)))
 
-
 def calculate_fretboard(start_radius, end_radius, scale_length, num_frets):
-	    """
+    """
     Calculate the positions and radii of frets on a guitar fretboard.
 
     Args:
