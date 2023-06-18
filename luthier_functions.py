@@ -14,13 +14,12 @@ For more, visit the repository at: https://github.com/tedbergstrand/LuthierToolb
 
 from fractions import Fraction
 
-def round_to_denominator(fraction_value, denominator=64):
+def round_to_denominator(fraction_value):
     """
     Rounds a given fraction to the nearest denominator found on a ruler.
 
     Args:
         fraction_value (float): The value of the fraction as a decimal number.
-        denominator (int, optional): The smallest denominator to consider. Default is 64.
 
     Returns:
         Fraction: The rounded fraction using the nearest denominator found on the ruler.
@@ -32,7 +31,7 @@ def round_to_denominator(fraction_value, denominator=64):
 	
     # If the fraction value is 0, return 0 with the specified denominator
     if fraction_value == 0:
-        return Fraction(0, denominator)
+        return Fraction(0, 64)
 
     # If the fraction value is negative, store the sign and make the value positive
     elif fraction_value < 0:
@@ -42,13 +41,13 @@ def round_to_denominator(fraction_value, denominator=64):
         sign = 1
 
     # Set of standard denominators to consider
-    standard_denominators = {2, 4, 8, 16, 32, denominator}
+    standard_denominators = {2, 4, 8, 16, 32, 64}
 
     # Calculate the numerator by rounding the fraction value multiplied by the denominator
-    numerator = round(fraction_value * denominator)
+    numerator = round(fraction_value * 64)
 
     # Create a Fraction object using the calculated numerator and denominator
-    fraction = Fraction(numerator, denominator)
+    fraction = Fraction(numerator, 64)
 
     # Check if the denominator is one of the standard ruler denominators or the specified denominator
     if fraction.denominator in standard_denominators:
