@@ -337,3 +337,65 @@ def calculate_spacing(nut_width, string_gauges, edge_distance=Decimal('0.125'), 
         position += inter_string_distance + Decimal(gauge)
 
     return inter_string_distance, positions
+
+def fret_placement(scale_length, fret_number):
+	"""
+    Calculates the placement of a fret on a stringed instrument based on the scale length and fret number. Works with either metric or inches.
+
+    Args:
+        scale_length (float): The length of the vibrating portion of the string, typically measured from the nut to the bridge.
+        fret_number (int): The number of the fret on the instrument. 0 represents the nut, and higher numbers represent frets closer to the bridge.
+
+    Returns:
+        float: The distance from the nut to the center of the specified fret, measured along the string.
+
+    Example:
+        >>> fret_placement(25.5, 12)
+        12.7844969284613
+
+    The function simply performs the fret placement math that everyone uses.
+
+    The `scale_length` argument should be a positive float representing the length of the string in inches or any other unit of measurement.
+    The `fret_number` argument should be a non-negative integer representing the fret number.
+
+    Note:
+    - This formula assumes a standard equal temperament tuning system.
+    """
+    return scale_length - (scale_length / (2 ** (fret_number / 12)))
+
+
+def calculate_fretboard(start_radius, end_radius, scale_length, num_frets):
+	    """
+    Calculate the positions and radii of frets on a guitar fretboard.
+
+    Args:
+        start_radius (float): The starting radius of the fretboard at the nut.
+        end_radius (float): The ending radius of the fretboard at the end of the extension (assumed to be one fret past your last fret).
+        scale_length (float): The scale length of the guitar.
+        num_frets (int): The number of frets on the fretboard.
+
+    Returns:
+        dict: A dictionary containing the following keys:
+            - 'fretboard_length' (float): The length of the fretboard.
+            - 'saddle_radius' (float): The radius of the saddle.
+            - 'result' (list): A list of tuples representing the positions and radii of each fret.
+                Each tuple contains two elements:
+                    - The position of the fret.
+                    - The radius of the fret.
+                    """
+    fretboard_length = fret_placement(scale_length, num_frets + 1)
+    final_fret_pos = fret_placement(scale_length, num_frets)
+
+    final_radius = start_radius + (final_fret_pos / fretboard_length) * (end_radius - start_radius)
+
+    saddle_radius = start_radius + (scale_length / fretboard_length) * (end_radius - start_radius)
+
+    positions = [fret_placement(scale_length, fret) for fret in range(1, num_frets + 1)]
+    result = [(pos, start_radius + (pos / fretboard_length) * (end_radius - start_radius)) for pos in positions[:-1]]
+    result.append((final_fret_pos, final_radius))
+
+    return {
+        'fretboard_length': fretboard_length,
+        'saddle_radius': saddle_radius,
+        'result': result
+    }
