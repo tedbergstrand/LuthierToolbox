@@ -16,7 +16,8 @@ from fractions import Fraction
 
 def round_to_denominator(fraction_value):
     """
-    Rounds a given fraction to the nearest denominator found on a ruler.
+    Rounds a given fraction to the nearest denominator found on a ruler. 
+    Can be supplied a decimal or fraction (which will evaluate to a decimal).
 
     Args:
         fraction_value (float): The value of the fraction as a decimal number.
