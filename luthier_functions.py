@@ -192,6 +192,7 @@ def input_to_inches(input_value):
 	return decimal_inch
 
 
+from fractions import Fraction
 
 def convert(input_value):
     """
